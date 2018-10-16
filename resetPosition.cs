@@ -7,10 +7,11 @@ public class resetPosition : MonoBehaviour {
     private Vector3 startingPos;
     private Vector3 currentPos;
     private float _gravity = -9.81f;
+    public GameObject gameObject;
 
     // Use this for initialization
     void Start() {
-        startingPos = GameObject.Find("MetaCube").transform.position;
+        startingPos = gameObject.transform.position;
         Physics.gravity = new Vector3(0, _gravity, 0);
     }
         		
@@ -18,11 +19,11 @@ public class resetPosition : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        currentPos = GameObject.Find("MetaCube").transform.position;
+        currentPos = gameObject.transform.position;
 
         if (currentPos.y < -1)
         {
-            GameObject.Find("MetaCube").transform.position = startingPos; 
+            gameObject.transform.position = startingPos; 
         }
 	}
 }

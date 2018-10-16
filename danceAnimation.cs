@@ -9,7 +9,7 @@ namespace Meta
 
 
 
-    [AddComponentMenu("Meta/Interaction/GrabInteraction")]
+    [AddComponentMenu("Meta/Interaction/danceInteraction")]
     public class danceAnimation : Interaction
     {
         public GameObject PatrickT;
