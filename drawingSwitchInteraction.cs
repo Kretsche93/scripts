@@ -35,20 +35,21 @@ namespace Meta
     /// <summary>
     /// Interaction to grab the model to translate its position.
     /// </summary>
-    [AddComponentMenu("Meta/Interaction/ShootInteraction")]
-    public class shootInteraction : Interaction
+    [AddComponentMenu("Meta/Interaction/DrawSwitchInteraction")]
+    public class drawingSwitchInteraction : Interaction
     {
-        public Rigidbody projectile;
-        public Transform shotPos;
-        public float shotForce = 1000f;
-        public float moveSpeed = 10f;
-        private bool engaged = false;
-        public GameObject regler;
-        //private bool waitTimer = true;
-
         private HandFeature _handFeature;
-
+        private GameObject trailRendererCurrent;
+        private GameObject trailRendererOld;
+        public GameObject drawingEnabled;
+        public GameObject drawingDisabled;
+        private MeshRenderer textEnabled;
+        private MeshRenderer textDisabled;   
+        public GameObject TrailRendererPrefab;
+        public GameObject brush;
         private Vector3 _localOffset;
+
+
         protected override bool CanEngage(Hand handProxy)
         {
             return GrabbingHands.Count == 1;
@@ -56,12 +57,37 @@ namespace Meta
 
         protected override void Engage()
         {
+            Transform parent = brush.GetComponent<Transform>();
             _handFeature = GrabbingHands[0];
 
-            engaged = true;
             PrepareRigidbodyForInteraction();
-            
+            textEnabled = drawingEnabled.GetComponent<MeshRenderer>();
+            textDisabled = drawingDisabled.GetComponent<MeshRenderer>();
+            trailRendererCurrent = GameObject.Find("TrailRenderer");
+            trailRendererOld = GameObject.Find("oldTrailRenderer");
 
+            if (textEnabled.enabled)
+            {
+                textEnabled.enabled = false;
+                textDisabled.enabled = true;
+                trailRendererCurrent.name = "oldTrailRenderer";
+                trailRendererCurrent.transform.parent = null;
+
+                if (trailRendererOld)
+                {
+                    Destroy(trailRendererOld);
+                }
+            }
+
+            else
+            {
+                
+                GameObject TrailRenderer = Instantiate(TrailRendererPrefab, parent);
+                TrailRenderer.name = "TrailRenderer";
+                textEnabled.enabled = true;
+                textDisabled.enabled = false;
+                
+            }
             // Store the offset of the object local to the hand feature.  This will be used to keep the object at the same distance from the hand when being moved.
 
             SetHandOffsets();
@@ -88,18 +114,12 @@ namespace Meta
         protected override void Disengage()
         {
             Manipulate();
-            engaged = false;
             RestoreRigidbodySettingsAfterInteraction();
             _handFeature = null;
         }
 
         protected override void Manipulate()
         {
-            if (engaged)
-            {
-                Shoot();                              
-            }
-            shotForce = regler.transform.localScale.x*1000;
             Move(TransformedHandPos());
         }
 
@@ -116,26 +136,5 @@ namespace Meta
             _localOffset = _handFeature.transform.InverseTransformDirection(TargetTransform.position - _handFeature.Position);
             SetGrabOffset(TransformedHandPos());
         }
-
-        private void Shoot()
-        {
-            //if (waitTimer)
-            //{
-                //waitTimer = false;
-                Rigidbody shot = Instantiate(projectile, shotPos.position, shotPos.rotation) as Rigidbody;
-                shot.AddForce(shotPos.forward * shotForce);
-                //Debug.Log("to Wait");
-                //Wait();
-              //  }
-        }
-
-        private System.Collections.Generic.IEnumerable<WaitForSeconds> Wait()
-        {
-            Debug.Log("Wait start");
-            //waitTimer = true;
-            yield return new WaitForSeconds(1);
-            Debug.Log("Wait end");
-        }
-
     }
 }
