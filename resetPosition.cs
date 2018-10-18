@@ -21,7 +21,7 @@ public class resetPosition : MonoBehaviour {
 	void Update () {
         currentPos = gameObject.transform.position;
 
-        if (currentPos.y < -1)
+        if (currentPos.y < -2)
         {
             gameObject.transform.position = startingPos; 
         }

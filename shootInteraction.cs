@@ -99,7 +99,7 @@ namespace Meta
             {
                 Shoot();                              
             }
-            shotForce = regler.transform.localScale.x*1000;
+            shotForce = regler.transform.localScale.x*500;
             Move(TransformedHandPos());
         }
 
