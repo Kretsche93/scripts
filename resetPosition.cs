@@ -7,7 +7,6 @@ public class resetPosition : MonoBehaviour {
     private Vector3 startingPos;
     private Vector3 currentPos;
     private float _gravity = -9.81f;
-    public GameObject gameObject;
 
     // Use this for initialization
     void Start() {
@@ -21,7 +20,7 @@ public class resetPosition : MonoBehaviour {
 	void Update () {
         currentPos = gameObject.transform.position;
 
-        if (currentPos.y < -2)
+        if (currentPos.y < -1)
         {
             gameObject.transform.position = startingPos; 
         }
