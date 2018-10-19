@@ -5,12 +5,10 @@ using UnityEngine.UI;
 
 public class toggleDrawing : MonoBehaviour {
     private GameObject sphere;
-    private TrailRenderer trailRenderer;
-    //private GameObject trailRendererOld;
+    private Transform trailRendererTrans;
+    private changeColorViaSlider trailRendererScript;
     public GameObject drawingEnabled;
     public GameObject drawingDisabled;
-    //private MeshRenderer textEnabled;
-    //private MeshRenderer textDisabled;
     public GameObject TrailRendererPrefab;
     public GameObject brush;
     private Vector3 _localOffset;
@@ -22,32 +20,33 @@ public class toggleDrawing : MonoBehaviour {
     
     }
     private void OnButtonClick () {
-        Transform brushParent = brush.GetComponent<Transform>();
+        Transform sphereParent = brush.transform.GetChild(1).GetComponent<Transform>();
 
-        //textEnabled = drawingEnabled.GetComponent<MeshRenderer>();
-        //textDisabled = drawingDisabled.GetComponent<MeshRenderer>();
+
         sphere = GameObject.Find("Sphere");
-        trailRenderer = sphere.GetComponentInChildren<TrailRenderer>();
-        //trailRendererOld = GameObject.Find("oldTrailRenderer");
+        
+
 
         if (drawingEnabled.activeSelf)
         {
             drawingEnabled.SetActive(false);
             drawingDisabled.SetActive(true);
-            trailRenderer.name = "oldTrailRenderer";
-            trailRenderer.transform.parent = null;
+            trailRendererTrans = sphere.transform.GetChild(0);
+            trailRendererScript = sphere.GetComponentInChildren<changeColorViaSlider>();
+            trailRendererTrans.name = "oldTrailRenderer";
+            trailRendererTrans.transform.parent = null;
+            Destroy(trailRendererScript);
 
-            //if (trailrendererold)
-            //{
-            //    destroy(trailrendererold);
-            //}
+
+
         }
 
         else
         {
 
-            GameObject trailRendererNew = Instantiate(TrailRendererPrefab, brushParent);
+            GameObject trailRendererNew = Instantiate(TrailRendererPrefab, sphereParent);
             trailRendererNew.name = "TrailRenderer";
+            trailRendererNew.AddComponent<changeColorViaSlider>();            
             drawingEnabled.SetActive(true);
             drawingDisabled.SetActive(false);
 

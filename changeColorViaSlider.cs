@@ -14,10 +14,16 @@ public class changeColorViaSlider : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        sliderRed = GameObject.Find("SliderRed").GetComponent<Slider>();
+        sliderGreen = GameObject.Find("SliderGreen").GetComponent<Slider>();
+        sliderBlue = GameObject.Find("SliderBlue").GetComponent<Slider>();
         tr = gameObject.GetComponent<TrailRenderer>();
-        material = tr.material;
+        //material = tr.material;
+        material = new Material(Shader.Find("Standard"));
         material.color = colorNew;
-	}
+        tr.material = material;
+        
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -28,6 +34,9 @@ public class changeColorViaSlider : MonoBehaviour {
             //sliderBrightness.value;
 
         material.color = colorNew;
+        colorNew.r = colorNew.r - 0.1f;
+        colorNew.g = colorNew.g - 0.1f;
+        colorNew.b = colorNew.b - 0.1f;
         material.SetColor("_EmissionColor", colorNew);
 	}
 
