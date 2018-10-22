@@ -7,6 +7,7 @@ public class changeColorViaSlider : MonoBehaviour {
     public Slider sliderRed;
     public Slider sliderGreen;
     public Slider sliderBlue;
+    public Slider brushWidthSlider;
     //public Slider sliderBrightness;
     private Material material;
     private TrailRenderer tr;
@@ -19,6 +20,7 @@ public class changeColorViaSlider : MonoBehaviour {
         sliderRed = GameObject.Find("SliderRed").GetComponent<Slider>();
         sliderGreen = GameObject.Find("SliderGreen").GetComponent<Slider>();
         sliderBlue = GameObject.Find("SliderBlue").GetComponent<Slider>();
+        brushWidthSlider = GameObject.Find("SliderWidth").GetComponent<Slider>();
         tr = gameObject.GetComponent<TrailRenderer>();
         colorCube = GameObject.Find("Colorcube");
         //colorCubeMat = GameObject.Find("Colorcube").GetComponent<MeshRenderer>().material;
@@ -37,6 +39,8 @@ public class changeColorViaSlider : MonoBehaviour {
         colorNew.b = sliderBlue.value;
         colorNew.g = sliderGreen.value;
         colorNew.a = 1;
+        tr.widthMultiplier = brushWidthSlider.value;
+
             //sliderBrightness.value;
 
         material.color = colorNew;
