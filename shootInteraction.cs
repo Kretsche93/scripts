@@ -33,7 +33,7 @@ using UnityEngine;
 namespace Meta
 {
     /// <summary>
-    /// Interaction to grab the model to translate its position.
+    /// Interaction to shoot projectiles.
     /// </summary>
     [AddComponentMenu("Meta/Interaction/ShootInteraction")]
     public class shootInteraction : Interaction
@@ -42,8 +42,27 @@ namespace Meta
         public Transform shotPos;
         public float shotForce = 1000f;
         public float moveSpeed = 10f;
-        private bool engaged = false;
+        public static bool engaged = false;
+
         public GameObject regler;
+        //public GameObject targetCube;
+        //public GameObject targetCube2;
+        //public GameObject targetCube3;
+        //public GameObject targetCube4;
+        //public GameObject targetCube5;
+        //public GameObject targetCube6;
+        //public GameObject targetCube7;
+        //public GameObject targetCube8;
+        //public GameObject targetCube9;
+        //private Vector3 startingPos;
+        //private Vector3 startingPos2;
+        //private Vector3 startingPos3;
+        //private Vector3 startingPos4;
+        //private Vector3 startingPos5;
+        //private Vector3 startingPos6;
+        //private Vector3 startingPos7;
+        //private Vector3 startingPos8;
+        //private Vector3 startingPos9;
         //private bool waitTimer = true;
 
         private HandFeature _handFeature;
@@ -53,11 +72,20 @@ namespace Meta
         {
             return GrabbingHands.Count == 1;
         }
+        
 
         protected override void Engage()
         {
             _handFeature = GrabbingHands[0];
-
+            //startingPos = targetCube.transform.position;
+            //startingPos2 = targetCube2.transform.position;
+            //startingPos3 = targetCube3.transform.position;
+            //startingPos4 = targetCube4.transform.position;
+            //startingPos5 = targetCube5.transform.position;
+            //startingPos6 = targetCube6.transform.position;
+            //startingPos7 = targetCube7.transform.position;
+            //startingPos8 = targetCube8.transform.position;
+            //startingPos9 = targetCube9.transform.position;
             engaged = true;
             PrepareRigidbodyForInteraction();
             
@@ -89,6 +117,17 @@ namespace Meta
         {
             Manipulate();
             engaged = false;
+            //targetCube.transform.position = startingPos;
+            //targetCube2.transform.position = startingPos2;
+            //targetCube3.transform.position = startingPos3;
+            //targetCube4.transform.position = startingPos4;
+            //targetCube5.transform.position = startingPos5;
+            //targetCube6.transform.position = startingPos6;
+            //targetCube7.transform.position = startingPos7;
+            //targetCube8.transform.position = startingPos8;
+            //targetCube9.transform.position = startingPos9;
+
+
             RestoreRigidbodySettingsAfterInteraction();
             _handFeature = null;
         }
