@@ -27,6 +27,7 @@ public class changeColorViaSlider : MonoBehaviour {
         //material = tr.material;
         material = new Material(Shader.Find("Standard"));
         material.color = colorNew;
+        material.EnableKeyword("_EMISSION");
         tr.material = material;
         colorCube.GetComponent<MeshRenderer>().material = material;
         //colorCubeMat = material;
@@ -45,9 +46,9 @@ public class changeColorViaSlider : MonoBehaviour {
 
         material.color = colorNew;
         colorCube.GetComponent<MeshRenderer>().material.color = colorNew;
-        colorNew.r = colorNew.r - 0.1f;
-        colorNew.g = colorNew.g - 0.1f;
-        colorNew.b = colorNew.b - 0.1f;
+        //colorNew.r = colorNew.r - 0.1f;
+        //colorNew.g = colorNew.g - 0.1f;
+        //colorNew.b = colorNew.b - 0.1f;
         material.SetColor("_EmissionColor", colorNew);
         colorCube.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", colorNew);
     }

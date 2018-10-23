@@ -6,6 +6,7 @@ using Meta.HandInput;
 public class resetPosition : MonoBehaviour {
     private Vector3 startingPos;
     private Vector3 currentPos;
+    private Quaternion startingRot;
     private float _gravity = -9.81f;
 
     // Use this for initialization
@@ -22,6 +23,9 @@ public class resetPosition : MonoBehaviour {
 
         if (currentPos.y < -1)
         {
+            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            gameObject.transform.rotation = startingRot;
             gameObject.transform.position = startingPos; 
         }
 	}
