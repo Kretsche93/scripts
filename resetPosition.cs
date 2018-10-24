@@ -12,6 +12,7 @@ public class resetPosition : MonoBehaviour {
     // Use this for initialization
     void Start() {
         startingPos = gameObject.transform.position;
+        startingRot = gameObject.transform.rotation;
         Physics.gravity = new Vector3(0, _gravity, 0);
     }
         		

@@ -17,7 +17,7 @@ namespace Meta
 
         //string url = "http://192.168.25.105/api/1LvlwLpMQlOd4tFNn1pniLoImIcEx8aiv0YOZcLM/lights/12/state";
         string url = "http://192.168.25.105/api/1LvlwLpMQlOd4tFNn1pniLoImIcEx8aiv0YOZcLM/groups/6/action";
-        string lightsOn = "{\"hue\":46920}";
+        string blueRequest = "{\"hue\":43000,\"sat\":200}";
         [SerializeField]
 
         private HandFeature _handFeature;
@@ -37,7 +37,7 @@ namespace Meta
 
             // Store the offset of the object local to the hand feature.  This will be used to keep the object at the same distance from the hand when being moved.
             SetHandOffsets();
-            UnityWebRequest www = UnityWebRequest.Put(url, lightsOn);
+            UnityWebRequest www = UnityWebRequest.Put(url, blueRequest);
             //UnityWebRequest www2 = UnityWebRequest.Put(url5, lightsOn);
             //UnityWebRequest www3 = UnityWebRequest.Put(url6, lightsOn);
             www.SendWebRequest();
