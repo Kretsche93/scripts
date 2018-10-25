@@ -9,20 +9,16 @@ public class resetPosition : MonoBehaviour {
     private Quaternion startingRot;
     private float _gravity = -9.81f;
 
-    // Use this for initialization
     void Start() {
         startingPos = gameObject.transform.position;
         startingRot = gameObject.transform.rotation;
         Physics.gravity = new Vector3(0, _gravity, 0);
     }
         		
-	
-	
-	// Update is called once per frame
 	void Update () {
         currentPos = gameObject.transform.position;
 
-        if (currentPos.y < -1)
+        if (currentPos.y < -3)
         {
             gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;

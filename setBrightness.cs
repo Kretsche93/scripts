@@ -26,9 +26,9 @@ public class setBrightness : MonoBehaviour {
 
 		if(sliderValueOld != sliderValueNew)
         {
-            string brightnessChanged = "{\"bri\":" + sliderValueNew + "}";
-            UnityWebRequest www = UnityWebRequest.Put(url, brightnessChanged);
-            www.SendWebRequest();
+            ////string brightnessChanged = "{\"bri\":" + sliderValueNew + "}";
+            ////UnityWebRequest www = UnityWebRequest.Put(url, brightnessChanged);
+            ////www.SendWebRequest();
             sliderValueOld = sliderValueNew;
         }
 	}

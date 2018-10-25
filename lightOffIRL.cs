@@ -5,19 +5,14 @@ using UnityEngine.Networking;
 
 namespace Meta
 {
-    /// <summary>
-    /// Interaction to grab the model to translate its position.
-    /// </summary>
-
-
 
     [AddComponentMenu("Meta/Interaction/lightsOffIRLInteraction")]
     public class lightOffIRL : Interaction
     {
 
         //string url = "http://192.168.25.105/api/1LvlwLpMQlOd4tFNn1pniLoImIcEx8aiv0YOZcLM/lights/12/state";
-        string url = "http://192.168.25.105/api/1LvlwLpMQlOd4tFNn1pniLoImIcEx8aiv0YOZcLM/groups/6/action";
-        string lightsOff = "{\"on\":false}";
+        ////string url = "http://192.168.25.105/api/1LvlwLpMQlOd4tFNn1pniLoImIcEx8aiv0YOZcLM/groups/6/action";
+        ////string lightsOff = "{\"on\":false}";
         [SerializeField]
 
         private HandFeature _handFeature;
@@ -37,10 +32,10 @@ namespace Meta
 
             // Store the offset of the object local to the hand feature.  This will be used to keep the object at the same distance from the hand when being moved.
             SetHandOffsets();
-            UnityWebRequest www = UnityWebRequest.Put(url, lightsOff);
+            ////UnityWebRequest www = UnityWebRequest.Put(url, lightsOff);
             //UnityWebRequest www2 = UnityWebRequest.Put(url5, lightsOff);
             //UnityWebRequest www3 = UnityWebRequest.Put(url6, lightsOff);
-            www.SendWebRequest();
+            ////www.SendWebRequest();
             //www2.SendWebRequest();
             //www3.SendWebRequest();
         }
