@@ -28,7 +28,7 @@ namespace Meta
             return GrabbingHands.Count == 1;
         }
 
-
+        /* The Engage() method gets called, when a hand starts grabbing an object */
         protected override void Engage()
         {
             _handFeature = GrabbingHands[0];
@@ -63,9 +63,9 @@ namespace Meta
             return false;
         }
 
+        /* The Disengage() method gets called, when a hand stops grabbing an object */
         protected override void Disengage()
         {
-            //Manipulate();
             RestoreRigidbodySettingsAfterInteraction();
             _handFeature = null;
 

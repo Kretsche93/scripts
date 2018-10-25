@@ -1,15 +1,10 @@
 ﻿using Meta.HandInput;
 
 using UnityEngine;
-using UnityEngine.Networking;
+using UnityEngine.Networking; //for the request
 
 namespace Meta
 {
-    /// <summary>
-    /// Interaction to grab the model to translate its position.
-    /// </summary>
-
-
 
     [AddComponentMenu("Meta/Interaction/blueColorHueGrabInteraction")]
     public class blueColorHueGrab : Interaction
@@ -28,7 +23,7 @@ namespace Meta
             return GrabbingHands.Count == 1;
         }
 
-
+        /* The Engage-method is called, when hands start grabbing an object */
         protected override void Engage()
         {
             _handFeature = GrabbingHands[0];
@@ -63,9 +58,10 @@ namespace Meta
             return false;
         }
 
+        /* The Disengage method gets called, when hands stop grabbing the object */
+         
         protected override void Disengage()
         {
-            //Manipulate();
             RestoreRigidbodySettingsAfterInteraction();
             _handFeature = null;
 
@@ -73,7 +69,6 @@ namespace Meta
 
         protected override void Manipulate()
         {
-
             Move(TransformedHandPos());
         }
 

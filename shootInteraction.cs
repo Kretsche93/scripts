@@ -1,5 +1,8 @@
 ﻿using Meta.HandInput;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Meta
 {
@@ -12,10 +15,12 @@ namespace Meta
         public Rigidbody projectile;
         public Transform shotPos;
         public float shotForce = 1000f;
-        public float moveSpeed = 10f;
         public static bool engaged = false;
 
-        public GameObject regler;
+        //public GameObject regler;
+        private Slider sliderForce;
+        private Slider sliderFrequency;
+        private float shotInterval;
         public GameObject targetCube;
         public GameObject targetCube2;
         public GameObject targetCube3;
@@ -39,10 +44,13 @@ namespace Meta
         protected override void Engage()
         {
             _handFeature = GrabbingHands[0];
-            
+            sliderForce = GameObject.Find("SliderShotForce").GetComponent<Slider>();
+            sliderFrequency = GameObject.Find("SliderShotFrequency").GetComponent<Slider>();
             engaged = true;
             PrepareRigidbodyForInteraction();
-            
+            shotForce = sliderForce.value;
+            shotInterval = 1/sliderFrequency.value;
+            StartCoroutine("Shoot");          
 
             // Store the offset of the object local to the hand feature.  This will be used to keep the object at the same distance from the hand when being moved.
 
@@ -78,11 +86,11 @@ namespace Meta
 
         protected override void Manipulate()
         {
-            if (engaged)
-            {
-                Shoot();                              
-            }
-            shotForce = regler.transform.localScale.x*1000;
+            //if (engaged)
+            //{
+            //    StartCoroutine("Shoot");
+            //}
+
             Move(TransformedHandPos());
         }
 
@@ -100,10 +108,18 @@ namespace Meta
             SetGrabOffset(TransformedHandPos());
         }
 
-        private void Shoot()
+        private IEnumerator Shoot()
         {
-                Rigidbody shot = Instantiate(projectile, shotPos.position, shotPos.rotation) as Rigidbody;
-                shot.AddForce(shotPos.forward * shotForce);
+            while (engaged)
+            {
+                yield return new WaitForSeconds(shotInterval);
+                if (engaged) //if disengaged while waiting
+                {
+                    Rigidbody shot = Instantiate(projectile, shotPos.position, shotPos.rotation) as Rigidbody;
+                    shot.AddForce(shotPos.forward * shotForce);
+                }
+            }          
+            
         }
 
     }
