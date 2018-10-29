@@ -9,8 +9,8 @@ public class setBrightness : MonoBehaviour {
     private Slider slider;
     private int sliderValueOld;
     private int sliderValueNew;
-    string url = "http://192.168.25.105/api/1LvlwLpMQlOd4tFNn1pniLoImIcEx8aiv0YOZcLM/groups/6/action";
-    
+    //string url = "http://192.168.25.105/api/1LvlwLpMQlOd4tFNn1pniLoImIcEx8aiv0YOZcLM/groups/6/action";
+    string url = "http://192.168.1.2/api/MMNCFAAqhymdD5fpyQqsbGGjcijsaE4DDBtkIJKz/lights/1/state";
 
     // Use this for initialization
     void Start () {
@@ -26,9 +26,9 @@ public class setBrightness : MonoBehaviour {
 
 		if(sliderValueOld != sliderValueNew)
         {
-            ////string brightnessChanged = "{\"bri\":" + sliderValueNew + "}";
-            ////UnityWebRequest www = UnityWebRequest.Put(url, brightnessChanged);
-            ////www.SendWebRequest();
+            string brightnessChanged = "{\"bri\":" + sliderValueNew + "}";
+            UnityWebRequest www = UnityWebRequest.Put(url, brightnessChanged);
+            www.SendWebRequest();
             sliderValueOld = sliderValueNew;
         }
 	}
